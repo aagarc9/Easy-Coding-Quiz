@@ -36,7 +36,7 @@ let score = 0;
 let questionCounter = 0;
 let availableQuestion = [];
 
-
+// 
 function startGame() {
     questionCounter = 0;
     score = 0;
@@ -53,7 +53,10 @@ function getNewQuestion() {
     console.log (currentQuestion)
     questionInfo.innerText = currentQuestion.question;
 
-    
+
+    // create a for loop to grab myquestions options??
+    myquestions.forEach(options => {
+        console.log(options)});
     
 }
 startGame()
