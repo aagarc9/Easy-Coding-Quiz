@@ -1,5 +1,5 @@
-let answerBtn = document.getElementById('answer-btn');
-let questionInfo = document.getElementById('question')
+let answerBtn = document.querySelector('.btn');
+let questionInfo = document.getElementById('question');
 
 
 let myquestions = [
@@ -31,16 +31,16 @@ let myquestions = [
 ];
 
 let currentQuestion = {};
-let acceptingAnswers = true;
+let acceptingAnswers = false;
 let score = 0;
 let questionCounter = 0;
 let availableQuestion = [];
 
-// 
+// start game
 function startGame() {
     questionCounter = 0;
     score = 0;
-    availableQuestion = myquestions;
+    availableQuestion = [...myquestions];
     console.log(availableQuestion);
     getNewQuestion();
 };
@@ -54,9 +54,21 @@ function getNewQuestion() {
     questionInfo.innerText = currentQuestion.question;
 
 
-    // create a for loop to grab myquestions options??
-    myquestions.forEach(options => {
-        console.log(options)});
+    // // create a for loop to grab myquestions options??
+    currentQuestion.options.forEach(options => {
+        console.log(options)
+        answerBtn.innerText = currentQuestion.options
+    });
     
+    availableQuestion.splice(index, -1 );
+
+    acceptingAnswers = true;
+
 }
+
+function showResults (){
+
+}
+
+
 startGame()
