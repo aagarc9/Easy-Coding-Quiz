@@ -30,6 +30,8 @@ let myquestions = [
 },
 ];
 
+console.log(myquestions.answer)
+
 let currentQuestion = {};
 let acceptingAnswers = false;
 let score = 0;
@@ -60,9 +62,7 @@ function getNewQuestion() {
         answerBtn.innerText = currentQuestion.options
     });
     
-    availableQuestion.splice(index, -1 );
-
-    acceptingAnswers = true;
+    // how did I display options in eanch button?
 
 }
 
