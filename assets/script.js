@@ -1,5 +1,6 @@
-let answerBtn = document.querySelector('.btn');
+let answerBtn = document.getElementsByClassName('btn');
 let questionInfo = document.getElementById('question');
+let nextBtn = document.getElementById('next-btn');
 
 
 let myquestions = [
@@ -10,7 +11,7 @@ let myquestions = [
 },
 {
     question: "What does HTML stand for?",
-    answer: "What does HTML stand for?",
+    answer: "Hyperlinks and Text Markup Language",
     options: ["Hyperlinks and Text Markup Language", "Home Tool Markup Language","Hyper Text Markup Language","Hyper Text Markdown Language"]
 },
 {
@@ -30,7 +31,6 @@ let myquestions = [
 },
 ];
 
-console.log(myquestions.answer)
 
 let currentQuestion = {};
 let acceptingAnswers = false;
@@ -47,24 +47,31 @@ function startGame() {
     getNewQuestion();
 };
 
+
 function getNewQuestion() {
 
     questionCounter++;
-    let index = Math.floor(Math.random() * myquestions.length);
-    currentQuestion = myquestions[index];
+    let index = Math.floor(Math.random() * availableQuestion.length);
+    currentQuestion = availableQuestion[index];
     console.log (currentQuestion)
     questionInfo.innerText = currentQuestion.question;
 
+    for (let i = 0; i < answerBtn.length; i++) {
+    answerBtn[i].innerHTML =currentQuestion.options[i]    
+    }
 
-    // // create a for loop to grab myquestions options??
-    currentQuestion.options.forEach(options => {
-        console.log(options)
-        answerBtn.innerText = currentQuestion.options
-    });
-    
-    // how did I display options in eanch button?
+    let answers = ""
 
-}
+
+    for (let i = 0; i < myquestions.length; i++) {
+        answers = currentQuestion.answer[i];
+        console.log(answers)   
+        }
+
+
+
+};
+
 
 function showResults (){
 
