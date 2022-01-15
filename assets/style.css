@@ -19,18 +19,6 @@ body {
     padding: 30px;
 }
 
-.btn-grid {
-    display: grid;
-    margin: 15px;
-    gap: 5px;
-}
-
-.btn {
-    background-color: rgb(161, 19, 161);
-    color: white;
-    border-radius: 5px;
-    padding: 5px 10px;
-}
 
 .controls {
     display: flex;
@@ -38,4 +26,10 @@ body {
     align-items: center;
     margin: 20px;
     gap: 10px;
+    
+}
+
+#start-btn {
+    text-decoration: none;
+    outline: 1px solid red;
 }

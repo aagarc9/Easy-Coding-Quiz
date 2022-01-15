@@ -1,108 +1,114 @@
-let answerBtn = document.getElementsByClassName('btn');
-let questionInfo = document.getElementById('question');
-let startButton = document.getElementById('')
+let questionInfo = document.getElementById('question')
+let choiceA = document.getElementById('A')
+let choiceB = document.getElementById('B')
+let choiceC = document.getElementById('C')
+let choiceD = document.getElementById('D')
+let progress = document.getElementById('progress')
 
-// let time = availableQuestion.length: *100;
-
-
-let myquestions = [
-{
-    question: "_______ is the process of finding errors and fixing them within a program.",
-    answer: "Debugging",
-    options: ["Compiling", "Executing","Debugging","Scanning"]
-},
-{
-    question: "What does HTML stand for?",
-    answer: "Hyperlinks and Text Markup Language",
-    options: ["Hyperlinks and Text Markup Language", "Home Tool Markup Language","Hyper Text Markup Language","Hyper Text Markdown Language"]
-},
-{
-    question: "What is the correct sequence of HTML tags for starting a webpage?",
-    answer: "HTML, Head, Title",
-    options: ["Title, Head, HTML", "HTML, Head, Title","Head, Title, HTML","Body, HTML, Title"]
-},
-{
-    question: "Which of the following defines a measurement in screen pixels?",
-    answer: "px",
-    options: ["px", "vh","vw","vmin"]
-},
-{
-    question: " What is the correct HTML tag for inserting a line break?",
-    answer: "Br",
-    options: ["Break", "Strong","Lb","Br"]
-},
+let score = 0;
+let time = 0;
+let questions = [
+    {
+        question: "_______ is the process of finding errors and fixing them within a program.",
+        answer: "Debugging",
+        choiceA: "Compiling",
+        choiceB:"Executing",
+        choiceC:"Debugging",
+        choiceD:"Scanning",
+    },
+    {
+        question: "What does HTML stand for?",
+        answer: "Hyperlinks and Text Markup Language",
+        choiceA: "Hyperlinks and Text Markup Language",
+        choiceB:"Home Tool Markup Language",
+        choiceC:"Hyper Text Markup Language",
+        choiceD:"Hyper Text Markdown Language",
+    },
+    {
+        question: "What is the correct sequence of HTML tags for starting a webpage?",
+        answer: "HTML, Head, Title",
+        choiceA:"Title, Head, HTML" ,
+        choiceB:"HTML, Head, Title",
+        choiceC:"Head, Title, HTML",
+        choiceD:"Body, HTML, Title",
+    },
+    {
+        question: "Which of the following defines a measurement in screen pixels?",
+        answer: "px",
+        choiceA:"px",
+        choiceB:"vh",
+        choiceC:"vw",
+        choiceD:"vmin",
+    },
+    {
+        question: " What is the correct HTML tag for inserting a line break?",
+        answer: "Br",
+        choiceA:"Break",
+        choiceB:"Strong",
+        choiceC:"Lb",
+        choiceD:"Br",
+    },
 ];
 
-let currentQuestion = {};
-let score = 0;
-let questionCounter = 0;
-let availableQuestion = [];
 
-// start game
-function startGame() {
-    questionCounter = 0;
-    score = 0;
-    availableQuestion = [...myquestions];
-    console.log(availableQuestion);
-    getNewQuestion();
-    
-};
-
-
-function getNewQuestion() {
-
-    questionCounter++;
-    // // let index = Math.floor(Math.random() * availableQuestion.length);
-    // let index = 0
-    for (let i = 0; i < availableQuestion.length; i++)
-    currentQuestion = availableQuestion[i];
-    console.log (currentQuestion)
-    questionInfo.innerText = currentQuestion.question;
-
-
-    for (let i = 0; i < answerBtn.length; i++) {
-    answerBtn[i].innerHTML =currentQuestion.options[i]    
-    }
-    console.log(currentQuestion.answer)
-    
-   
-};
-
-// answerBtn.addEventListener('click', questionsClicks)
-
-
-
-function questionsClicks() {
-    // check if the user guessed incorrectly 
-    if(currentQuestion.answer !== availableQuestion[currentQuestion].answer){
-        // time has to be subtracted 
-        time -= 15;
-        if(time<0) {
-            time =0;
-        }
-    }
-    questionCounter++;
-    if(questionCounter === availableQuestion.length) {
-        endQuiz() // or could be showResults()
-    } else {
-        getNewQuestion(); // okay just continue 
-    }
+// create an index for my question array. To grab the index. (took forever to figure this out)
+let lastQuestionIndex = questions.length- 1;
+// index for array
+let questionIndex = 0;
+// start Game
+function startGame () {
+    // timer
+    getNewQuestion()
 }
+
+// create a function to display in HTML
+function getNewQuestion () {
+    let q =questions[questionIndex];
+    questionInfo.innerHTML = q.question;
+    choiceA.innerHTML = q.choiceA;
+    choiceB.innerHTML = q.choiceB;
+    choiceC.innerHTML = q.choiceC;
+    choiceD.innerHTML = q.choiceD;
+
+    console.log(q.answer)
+}
+// test code to see if next question pops up
+getNewQuestion()
+// currentQuestionIndex++;
+// renderQuestion()
+
+
+function checkAnswer(correct) {
+    let q =questions[questionIndex];
+    if(q.answer === correct){
+        score++;
+    }else {
+    }
+
+    if(questionIndex < lastQuestionIndex) {
+        questionIndex++;
+        getNewQuestion()
+    } else {}
+}
+
+// function questionsClicks() {
+//     // check if the user guessed incorrectly 
+//     if(currentQuestion.answer !== availableQuestion[currentQuestion].answer){
+//         // time has to be subtracted 
+//         time -= 15;
+//         if(time<0) {
+//             time =0;
+//         }
+//     }
+//     questionCounter++;
+//     if(questionCounter === availableQuestion.length) {
+//         endQuiz() // or could be showResults()
+//     } else {
+//         getNewQuestion(); // okay just continue 
+//     }
+// }
    
-    let usersAnswer = ""
 
-    // Create a for loop to generate the next question after the answer button is selected
-    // answerBtn.addEventListener('click', function(){
-        if (usersAnswer === currentQuestion.answer) {
-            score++; 
-        
-        } 
-        else {
-        
-        }  
-
-        // return answerBtn.addEventListener('click', questionsClicks)
-    // create an answer btn??
 
 // session storage, cookies, cache, local storage 
     // also have objects (JSON- Javascript OBJECT NOTATION), empty arrays
