@@ -31,9 +31,7 @@ let myquestions = [
 },
 ];
 
-
 let currentQuestion = {};
-let acceptingAnswers = false;
 let score = 0;
 let questionCounter = 0;
 let availableQuestion = [];
@@ -51,24 +49,36 @@ function startGame() {
 function getNewQuestion() {
 
     questionCounter++;
-    let index = Math.floor(Math.random() * availableQuestion.length);
-    currentQuestion = availableQuestion[index];
+    // // let index = Math.floor(Math.random() * availableQuestion.length);
+    // let index = 0
+    for (let i = 0; i < availableQuestion.length; i++)
+    currentQuestion = availableQuestion[i];
     console.log (currentQuestion)
     questionInfo.innerText = currentQuestion.question;
+
 
     for (let i = 0; i < answerBtn.length; i++) {
     answerBtn[i].innerHTML =currentQuestion.options[i]    
     }
+    console.log(currentQuestion.answer)
 
-    let answers = ""
+    let usersAnswer = "";
 
+    // Create a for loop to generate the next question after the answer button is selected
+    // answerBtn.addEventListener('click', function(){
+        if (usersAnswer === currentQuestion.answer) {
+            score++;
+            console.log("It is correct")
+        } else {
+            console.log("Wrong")
+        }  
+    
+    // create an answer btn??
 
-    for (let i = 0; i < myquestions.length; i++) {
-        answers = currentQuestion.answer[i];
-        console.log(answers)   
-        }
-
-
+    // // for to grab the next questions
+    // for (let i = 0; i < availableQuestion.length; i++) {
+    //     console.log(availableQuestion[i].question)   
+    //     }
 
 };
 
