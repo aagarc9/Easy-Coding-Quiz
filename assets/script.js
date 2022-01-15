@@ -1,6 +1,8 @@
 let answerBtn = document.getElementsByClassName('btn');
 let questionInfo = document.getElementById('question');
-let nextBtn = document.getElementById('next-btn');
+let startButton = document.getElementById('')
+
+// let time = availableQuestion.length: *100;
 
 
 let myquestions = [
@@ -43,6 +45,7 @@ function startGame() {
     availableQuestion = [...myquestions];
     console.log(availableQuestion);
     getNewQuestion();
+    
 };
 
 
@@ -61,31 +64,67 @@ function getNewQuestion() {
     answerBtn[i].innerHTML =currentQuestion.options[i]    
     }
     console.log(currentQuestion.answer)
+    
+   
+};
 
-    let usersAnswer = "";
+// answerBtn.addEventListener('click', questionsClicks)
+
+
+
+function questionsClicks() {
+    // check if the user guessed incorrectly 
+    if(currentQuestion.answer !== availableQuestion[currentQuestion].answer){
+        // time has to be subtracted 
+        time -= 15;
+        if(time<0) {
+            time =0;
+        }
+    }
+    questionCounter++;
+    if(questionCounter === availableQuestion.length) {
+        endQuiz() // or could be showResults()
+    } else {
+        getNewQuestion(); // okay just continue 
+    }
+}
+   
+    let usersAnswer = ""
 
     // Create a for loop to generate the next question after the answer button is selected
     // answerBtn.addEventListener('click', function(){
         if (usersAnswer === currentQuestion.answer) {
-            score++;
-            console.log("It is correct")
-        } else {
-            console.log("Wrong")
+            score++; 
+        
+        } 
+        else {
+        
         }  
-    
+
+        // return answerBtn.addEventListener('click', questionsClicks)
     // create an answer btn??
 
-    // // for to grab the next questions
-    // for (let i = 0; i < availableQuestion.length; i++) {
-    //     console.log(availableQuestion[i].question)   
-    //     }
-
-};
+// session storage, cookies, cache, local storage 
+    // also have objects (JSON- Javascript OBJECT NOTATION), empty arrays
+    // databases - IndexedDB, MySQL, MongoDB... sql nosql databases
 
 
-function showResults (){
+    // local storage 
+function savedScores() {
+    // you want an if statment, within which you can put these localStorage methods
+    // local storage getItem method and setItem methods 
+    var highestScores = JSON.parse(window.localStorage.getItem('highscores')) || [];
+
+    // in order to save to local storage to setItem
+    window.localStorage.setItem('highscores', JSON.stringify(highestScores))
+
+
 
 }
 
+
+function endQuiz() {
+
+}
 
 startGame()
