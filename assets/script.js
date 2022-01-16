@@ -4,9 +4,12 @@ let choiceB = document.getElementById('B')
 let choiceC = document.getElementById('C')
 let choiceD = document.getElementById('D')
 let progress = document.getElementById('progress')
+let clockTimer = document.getElementById ('timer')
+let scoreCounter = document.getElementById('score')
 
 let score = 0;
-let time = 100;
+let time = 60;
+
 let questions = [
     {
         question: "_______ is the process of finding errors and fixing them within a program.",
@@ -55,10 +58,13 @@ let questions = [
 let lastQuestionIndex = questions.length- 1;
 // index for array
 let questionIndex = 0;
+
+// ------------------------------------------------------------------------------------
 // start Game
 function startGame () {
     // timer
     getNewQuestion()
+    progressBar()
 }
 
 // create a function to display in HTML
@@ -70,25 +76,30 @@ function getNewQuestion () {
     choiceC.innerHTML = q.choiceC;
     choiceD.innerHTML = q.choiceD;
 
-    console.log(q.answer)
+    // console.log(q.answer)
 }
 // test code to see if next question pops up
 getNewQuestion()
-// currentQuestionIndex++;
-// renderQuestion()
+questionTimer()
+
 
 // create a function the check answer
-function checkAnswer(correct) {
+function checkAnswer() {
     let q =questions[questionIndex];
-    if(q.answer === correct){
+    if(q.answer){
         score++;
+        // answeringquestion();
+        // questionTimer();
     }else {
+        questionTimer();
+        // answeringquestion();
     }
-
     if(questionIndex < lastQuestionIndex) {
         questionIndex++;
         getNewQuestion()
-    } else {}
+    } else {
+        // endQuiz()
+    }
 }
 
 function questionTimer(correct) {
@@ -96,17 +107,18 @@ function questionTimer(correct) {
     let q =questions[questionIndex]; 
     if(q.answer !== correct){
         // time has to be subtracted 
-        time -= 20;
+        time -= 15;
+        clockTimer.innerText = time
         if(time<0) {
             time =0;
         }
     }
-    questionCounter++;
-    if(questionCounter === availableQuestion.length) {
-        endQuiz() // or could be showResults()
-    } else {
-        getNewQuestion(); // okay just continue 
-    }
+    // questionCounter++;
+    // if(questionCounter === availableQuestion.length) {
+    //     endQuiz() // or could be showResults()
+    // } else {
+    //     getNewQuestion(); // okay just continue 
+    // }
 }
    console.log(time)
 
@@ -129,19 +141,26 @@ function savedScores() {
 
 }
 
-function progressRender(){
+function progressBar() {
     for(let i = 0; i <= lastQuestionIndex; i++){
-        progress.innerHTML += "<div  class='prog' id=" + i + "><div>";
+        progress.innerHTML += "<div class='prog' id="+ i +"></div>";
     } 
 }
-function answerIsCorrect() {
-    document.getElementById(currentQuestionIndex).style.backgroundColor ="purple"
+function answeringquestion() {
+    document.getElementById(questionIndex).style.backgroundColor ="purple"
 }
-function answerIsWrong() {
-    document.getElementById(currentQuestionIndex).style.backgroundColor ="purple"
-}
-function endQuiz() {
 
+function endQuiz() {
+    scoreCounter.style.display = "block";
+    let scorePercent = Math.round(100 * score / questions.length);
+    let display = (scorePercent >= 80) ? "80%":
+    (scorePercent >= 60) ? "60%":
+    (scorePercent >= 40) ? "40%":
+    (scorePercent >= 20) ? "20%":
+    (scorePercent >= 0) ? "0%":
+
+    scoreCounter.innerHTML = display;
 }
 
 startGame()
+console.log(display)
