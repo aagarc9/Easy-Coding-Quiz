@@ -6,7 +6,7 @@ let choiceD = document.getElementById('D')
 let progress = document.getElementById('progress')
 
 let score = 0;
-let time = 0;
+let time = 100;
 let questions = [
     {
         question: "_______ is the process of finding errors and fixing them within a program.",
@@ -77,7 +77,7 @@ getNewQuestion()
 // currentQuestionIndex++;
 // renderQuestion()
 
-
+// create a function the check answer
 function checkAnswer(correct) {
     let q =questions[questionIndex];
     if(q.answer === correct){
@@ -91,23 +91,24 @@ function checkAnswer(correct) {
     } else {}
 }
 
-// function questionsClicks() {
-//     // check if the user guessed incorrectly 
-//     if(currentQuestion.answer !== availableQuestion[currentQuestion].answer){
-//         // time has to be subtracted 
-//         time -= 15;
-//         if(time<0) {
-//             time =0;
-//         }
-//     }
-//     questionCounter++;
-//     if(questionCounter === availableQuestion.length) {
-//         endQuiz() // or could be showResults()
-//     } else {
-//         getNewQuestion(); // okay just continue 
-//     }
-// }
-   
+function questionTimer(correct) {
+    // check if the user guessed incorrectly
+    let q =questions[questionIndex]; 
+    if(q.answer !== correct){
+        // time has to be subtracted 
+        time -= 20;
+        if(time<0) {
+            time =0;
+        }
+    }
+    questionCounter++;
+    if(questionCounter === availableQuestion.length) {
+        endQuiz() // or could be showResults()
+    } else {
+        getNewQuestion(); // okay just continue 
+    }
+}
+   console.log(time)
 
 
 // session storage, cookies, cache, local storage 
@@ -128,7 +129,17 @@ function savedScores() {
 
 }
 
-
+function progressRender(){
+    for(let i = 0; i <= lastQuestionIndex; i++){
+        progress.innerHTML += "<div  class='prog' id=" + i + "><div>";
+    } 
+}
+function answerIsCorrect() {
+    document.getElementById(currentQuestionIndex).style.backgroundColor ="purple"
+}
+function answerIsWrong() {
+    document.getElementById(currentQuestionIndex).style.backgroundColor ="purple"
+}
 function endQuiz() {
 
 }
