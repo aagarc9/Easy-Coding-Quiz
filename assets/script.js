@@ -98,15 +98,15 @@ function checkAnswer(correct) {
        endQuiz()
     }
 }
-function questionTimer() {
+function questionTimer(correct) {
     // Sets interval in variable
   var timerInterval = setInterval(function() {
     time--;
 // check if the user guessed incorrectly
     let q =questions[questionIndex]; 
-    if(q.answer !== true){
+    if(q.answer !== correct){
         // time has to be subtracted 
-        time -= 15;
+        time -= 10;
         clockTimer.innerText = time;
         if (time === 0) {
             clearInterval(timerInterval);
