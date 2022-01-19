@@ -5,8 +5,7 @@ let choice3 = document.getElementById('3')
 let choice4 = document.getElementById('4')
 let progress = document.getElementById('progress')
 let clockTimer = document.getElementById ('timer')
-let scoreCounter = document.getElementById('score')
-let choicesEl = document.getElementsByClassName('.choice')
+let scoreCounter = document.getElementById('scoreContainer')
 
 let score = 0;
 let time = 60;
@@ -64,8 +63,8 @@ let questionIndex = 0;
 // start Game
 function startGame () {
     // timer
-    // getNewQuestion()
-    // questionTimer()
+    getNewQuestion()
+    questionTimer()
 }
 
 // create a function to display in HTML
@@ -78,8 +77,6 @@ function getNewQuestion () {
     choice4.innerHTML = q.choice4;
 }
 // test code to see if next question pops up
-getNewQuestion()
-questionTimer()
 
 
 // create a function the check answer
@@ -88,30 +85,27 @@ function checkAnswer(correct) {
     if(q.answer === correct){
         score++;
         console.log(score);
-    }else {
+    } if (q.answer !== correct) {
+        // time has to be subtracted 
+        time -= 10;
     }
     if(questionIndex < lastQuestionIndex) {
         questionIndex++;
         getNewQuestion()
     } else {
         clearInterval();
-       endQuiz()
+       endQuiz();
     }
 }
-function questionTimer(correct) {
+function questionTimer() {
     // Sets interval in variable
   var timerInterval = setInterval(function() {
     time--;
-// check if the user guessed incorrectly
-    let q =questions[questionIndex]; 
-    if(q.answer !== correct){
-        // time has to be subtracted 
-        time -= 10;
-        clockTimer.innerText = time;
-        if (time === 0) {
+        clockTimer.innerText = "Timer: " + time + " seconds";
+        if (time <= 0) {
             clearInterval(timerInterval);
           }
-        }
+    
     }, 1000);
 
 }
@@ -143,7 +137,7 @@ function endQuiz() {
     let display = scorePercent
   
 
-    scoreCounter.innerHTML = display;
+    scoreCounter.innerHTML = "You scored " + display + "%. " ;
 }
 
 startGame()
